@@ -10,7 +10,6 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.util.Objects;
 import java.util.Optional;
 
 @Service
@@ -21,20 +20,15 @@ public class EmployeeService {
 
     public Employee changeState(Employee employee, EmployeeEvent event) {
 
-        if(Objects.isNull(employee)){
-            throw new IllegalStateException("Employee can't be empty!");
-        }
-
         StateMachine<EmployeeState, EmployeeEvent> stateMachine = new StateMachine<>(employee.getState(),
                 EmployeeStateConfig.build());
-
         try {
             stateMachine.fire(event);
-        }catch(Exception e){
-            throw new IllegalStateException(e.getMessage());
+        } catch (Exception e) {
+            throw new RuntimeException(e.getMessage());
         }
 
-        if(!employee.getState().equals(stateMachine.getState())) {
+        if (!employee.getState().equals(stateMachine.getState())) {
             employee.setState(stateMachine.getState());
             employeeRepository.save(employee);
 
@@ -42,12 +36,12 @@ public class EmployeeService {
         return employee;
     }
 
-    public Employee addEmployee(Employee employee){
+    public Employee addEmployee(Employee employee) {
         return this.employeeRepository.save(employee);
     }
 
-    public Employee getEmployeeById(Long id){
+    public Employee getEmployeeById(Long id) {
         Optional<Employee> employee = this.employeeRepository.findById(id);
-        return employee.orElseThrow(() -> new IllegalStateException("No Employee found with provided id"));
+        return employee.orElseThrow(() -> new RuntimeException("No Employee found with provided id"));
     }
 }

@@ -20,7 +20,7 @@ public class Employee {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Schema( description = "Employee Name")
+    @Schema(description = "Employee Name")
     private String name;
 
     @Schema(description = "Employee State", accessMode = Schema.AccessMode.READ_ONLY)
