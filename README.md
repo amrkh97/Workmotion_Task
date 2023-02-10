@@ -4,22 +4,15 @@
 
 ## Getting Started
 
-### 1. Package the Application:
-
-- ```mvn clean package```
-
-### 2. Build the docker images:  
-
-- ```docker-compose  build```
-
-### 3. Run the docker image:
+### 1. Run the docker image:
+#### NOTE: It may take some time to download the dependencies for the first time.
 
 - ```docker-compose  up```
 
-### 4. Check the openApi/Swagger documentation:
+### 2. Check the OpenApi/Swagger documentation:
 
-[Swagger Link](http://localhost:80/swagger-ui/index.html)
+[Swagger Link](http://localhost:8080/swagger-ui/index.html)
 
-### 5. Enjoy!
+### 3. Enjoy!
 
 ![That's All folks gif](thats-all-folks.gif)

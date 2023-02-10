@@ -1,12 +1,16 @@
-FROM adoptopenjdk/openjdk11
+FROM maven:3-jdk-11-slim AS build
+
+WORKDIR /app
+
+COPY . .
+
+RUN mvn clean package
+
+FROM maven:3-jdk-11-slim
 
 LABEL maintainer="Amr Khaled"
 
-#RUN mvn clean package
-
-#WORKDIR /workmotion
-
-COPY ./target/employee-state-machine-0.0.1-SNAPSHOT.jar .
+COPY --from=build /app/target/employee-state-machine-0.0.1-SNAPSHOT.jar .
 
 EXPOSE 8080
 

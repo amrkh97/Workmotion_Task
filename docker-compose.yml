@@ -1,4 +1,4 @@
-version: "3"
+version: "3.8"
 networks:
   workmotion:
     driver: bridge
@@ -8,9 +8,10 @@ services:
     container_name: employee-state-machine
     build:
       context: .
+      dockerfile: Dockerfile
     restart: on-failure
     ports:
-      - "80:8080"
+      - "8080:8080"
     networks: 
       - workmotion
     volumes:
